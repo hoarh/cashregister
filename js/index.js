@@ -11,22 +11,31 @@
 	// 
 	// });
 
+var total = 0
+
 $(function() {
 	
 	$('#entry').submit(function(e) {
 	 	e.preventDefault();
-		var userInput = parseFloat($('#newEntry').val());		
-		userInput = userInput.toFixed(2);
-		console.log(userInput);
-		$('#entries').append('<tr><td></td><td>' + '$' + userInput + '</td></tr>');
-		var total = (total + userInput);
+		var userInput = $('#newEntry').val();
+		var userInputFloat = parseFloat(userInput);		
+		total = total + userInputFloat;
+		var priceText=convertNum(userInput);
+		$('#entries').append('<tr><td></td><td>' + priceText + '</td></tr>');
 		$('#total').html('$'+total);
+		$('#newEntry').val('');
 	});
 
-	//when user clicks enter, form submit handler so page doesn't reload and capture user input
+	//when user clicks enter, form submit handler so page doesn't reload
+	//capture user input and turn into a number 
 	//convert amount to currency
 	//display input as as a row in the table
 	//add the user input to the total (#total)
+	//clear entry input
 
+	function convertNum(numInput) {
+		var currencyString = "$" + numInput;
+		return currencyString;
+	}
 });
 
